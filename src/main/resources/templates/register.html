@@ -32,6 +32,11 @@
       <div class="card-header">
         <h2 class="text-center">Registration</h2>
       </div>
+      <div th:if="${param.success}">
+        <div class="alert-info">
+          You have successfully registered to our application!
+        </div>
+      </div>
       <div class="card-body">
         <form method="post"
               role="form"
@@ -48,6 +53,8 @@
               th:field="*{firstName}"
               type="text"
             />
+            <p th:errors = "*{firstName}" class="text-danger" th:if="${#fields.hasErrors('firstName')}"></p>
+
           </div>
 
           <div class="form-group mb-3">
@@ -60,6 +67,7 @@
                     th:field="*{lastName}"
                     type="text"
             />
+            <p th:errors = "*{lastName}" class="text-danger" th:if="${#fields.hasErrors('lastName')}"></p>
           </div>
 
           <div class="form-group mb-3">
@@ -72,6 +80,7 @@
                     th:field="*{email}"
                     type="email"
             />
+            <p th:errors = "*{email}" class="text-danger" th:if="${#fields.hasErrors('email')}"></p>
           </div>
 
           <div class="form-group mb-3">
@@ -84,6 +93,7 @@
                     th:field="*{password}"
                     type="password"
             />
+            <p th:errors = "*{password}" class="text-danger" th:if="${#fields.hasErrors('password')}"></p>
           </div>
 
           <div class="form-group">
