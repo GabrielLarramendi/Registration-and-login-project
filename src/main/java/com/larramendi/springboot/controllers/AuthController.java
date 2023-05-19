@@ -8,9 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -39,7 +37,7 @@ public class AuthController {
                                BindingResult result, Model model){
         User existentUser = userService.findUserByEmail(userDTO.getEmail());
 
-        if(existentUser != null && existentUser.getEmail() != null && existentUser.getEmail().isEmpty()) {
+        if(existentUser != null && existentUser.getEmail() != null && !existentUser.getEmail().isEmpty()) {
             result.rejectValue("email", null, "There is already an account registered with the same email.");
         }
 

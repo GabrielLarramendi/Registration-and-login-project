@@ -24,7 +24,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void saveUser(UserDTO userDTO) {
         User user = new User();
-        user.setName(userDTO.getFirstName() + userDTO.getLastName());
+        user.setName(userDTO.getFirstName() + " " + userDTO.getLastName());
         user.setEmail(userDTO.getEmail());
         user.setPassword(userDTO.getPassword()); //Encrypt with spring security
 
@@ -47,6 +47,11 @@ public class UserServiceImpl implements UserService {
         return savedUsers.stream()
                 .map(this::mapToUserDTO)
                 .toList();
+    }
+
+    @Override
+    public void deleteUser(Long id) {
+        userRepository.deleteById(id);
     }
 
     private Role checkRoleExist() {
