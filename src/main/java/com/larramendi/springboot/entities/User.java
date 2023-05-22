@@ -1,6 +1,8 @@
 package com.larramendi.springboot.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,9 +23,15 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(nullable = false)
+    @NotEmpty
+    @NotBlank
     private String name;
     @Column(nullable = false, unique = true)
+    @NotEmpty
+    @NotBlank
     private String email;
+    @NotEmpty
+    @NotBlank
     @Column(nullable = false)
     private String password;
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)

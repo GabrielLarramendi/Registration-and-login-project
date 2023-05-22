@@ -24,8 +24,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public void saveUser(UserDTO userDTO) {
         User user = new User();
-        user.setName(userDTO.getFirstName() + " " + userDTO.getLastName());
-        user.setEmail(userDTO.getEmail());
+        user.setName(userDTO.getFirstName().trim() + " " + userDTO.getLastName().trim());
+        user.setEmail(userDTO.getEmail().trim());
         user.setPassword(userDTO.getPassword()); //Encrypt with spring security
 
         Role role = roleRepository.findByName("ROLE_ADMIN");
