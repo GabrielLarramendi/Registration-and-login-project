@@ -7,6 +7,7 @@ import com.larramendi.springboot.repositories.RoleRepository;
 import com.larramendi.springboot.repositories.UserRepository;
 import com.larramendi.springboot.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
@@ -21,12 +22,15 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private RoleRepository roleRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @Override
     public void saveUser(UserDTO userDTO) {
         User user = new User();
         user.setName(userDTO.getFirstName().trim() + " " + userDTO.getLastName().trim());
         user.setEmail(userDTO.getEmail().trim());
-        user.setPassword(userDTO.getPassword()); //Encrypt with spring security
+        user.setPassword(passwordEncoder.encode(userDTO.getPassword())); //Encrypt with spring security
 
         Role role = roleRepository.findByName("ROLE_ADMIN");
         if(role == null) {
